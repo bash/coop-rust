@@ -8,8 +8,7 @@ use std::env;
 use std::process;
 
 use coop::time::midnight;
-use coop::menu::Results;
-use coop::locations::Locations;
+use coop::data::{Results, Locations};
 use coop::api::{fetch_menus, fetch_locations};
 use coop::io::{get_location, AnsiFormattable};
 

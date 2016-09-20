@@ -3,13 +3,10 @@ extern crate hyper;
 use std::string::String;
 use std::io::Read;
 
-use hyper::client::Client;
-use hyper::client::Response;
-use rustc_serialize::json;
-use rustc_serialize::Decodable;
+use hyper::client::{Client, Response};
+use rustc_serialize::{json, Decodable};
 
-use coop::menu::Results;
-use coop::locations::Locations;
+use coop::data::{Results, Locations};
 
 const MENUS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/menus";
 const LOCATIONS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/locations";
