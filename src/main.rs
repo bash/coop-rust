@@ -9,11 +9,19 @@ use std::process;
 
 use coop::time::midnight;
 use coop::menu::Results;
-use coop::api::fetch_menus;
+use coop::locations::Locations;
+use coop::api::{fetch_menus, fetch_locations};
 use coop::io::{get_location, AnsiFormattable};
 
-fn main() {
-    let location_arg: Option<String> = env::args().nth(1);
+const HELP: &'static str = "Usage: coop [COMMAND]
+
+Available Subcommands:
+ - menus [LOCATION]     -  Shows menus for a location
+ - locations            -  Lists all available locations
+";
+
+fn menus() {
+    let location_arg: Option<String> = env::args().nth(2);
 
     let location = match location_arg {
         Some(value) => value,
@@ -36,4 +44,39 @@ fn main() {
     }
 
     println!("");
+}
+
+fn locations() {
+    let response: Locations = fetch_locations().unwrap();
+
+    println!("Available locations");
+
+    for location in response.results {
+        println!(" - {}", location);
+    }
+}
+
+fn help() {
+    println!("{}", HELP);
+}
+
+fn unknown(command: String) {
+    println!("Unknown command {}", command);
+}
+
+fn main() {
+    let command_wrapped = env::args().nth(1);
+
+    if let Option::None = command_wrapped {
+        help();
+        return;
+    }
+
+    let command: String = command_wrapped.unwrap();
+
+    match command.as_ref() {
+        "menus" => menus(),
+        "locations" => locations(),
+        _ => unknown(command)
+    }
 }
