@@ -16,19 +16,11 @@ Available Subcommands:
  - locations            -  Lists all available locations
 ";
 
-fn help() {
-    println!("{}", HELP);
-}
-
-fn unknown(command: String) {
-    println!("Unknown command {}", command);
-}
-
 fn main() {
     let command_wrapped = env::args().nth(1);
 
     if let Option::None = command_wrapped {
-        help();
+        println!("{}", HELP);
         return;
     }
 
@@ -37,6 +29,6 @@ fn main() {
     match command.as_ref() {
         "menus" => show_menus(),
         "locations" => show_locations(),
-        _ => unknown(command)
+        _ => println!("Unknown command {}", command)
     }
 }
