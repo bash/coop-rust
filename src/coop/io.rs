@@ -6,7 +6,7 @@ use std::string::ToString;
 enum AnsiFormat {
     Reset = 0,
     Bold = 1,
-    // Red = 31,
+    Red = 31,
     Cyan = 36
 }
 
@@ -19,6 +19,7 @@ impl ToString for AnsiFormat {
 pub trait AnsiFormattable {
     fn bold(&self) -> String;
     fn cyan(&self) -> String;
+    fn red(&self) -> String;
 }
 
 impl AnsiFormattable for String {
@@ -28,6 +29,10 @@ impl AnsiFormattable for String {
 
     fn cyan(&self) -> String {
         return ansi_format(self, AnsiFormat::Cyan);
+    }
+
+    fn red(&self) -> String {
+        return ansi_format(self, AnsiFormat::Red);
     }
 }
 

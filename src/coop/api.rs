@@ -21,9 +21,8 @@ fn decode(res: &mut Response) -> Result<Results, ApiError> {
     let mut string = String::new();
     let readres = res.read_to_string(&mut string);
 
-    match readres {
-        Err(_) => return Err(ApiError::FetchError),
-        _ => {}
+    if let Err(_) = readres {
+        return Err(ApiError::FetchError);
     }
 
     let result = json::decode(&string);
@@ -34,12 +33,15 @@ fn decode(res: &mut Response) -> Result<Results, ApiError> {
     };
 }
 
-pub fn fetch_menus(timestamp: i64, location: String) -> Result<Results, ApiError> {
+pub fn fetch_menus(timestamp: i64, location: &String) -> Result<Results, ApiError> {
     let client = Client::new();
     let url = format!("{}/{}/{}", API_URL, location, timestamp);
 
-    return match client.get(&url).send() {
-        Ok(mut res) => decode(&mut res),
-        Err(_) => Err(ApiError::FetchError)
-    };
+    let resp_wrapped = client.get(&url).send();
+
+    if let Ok(mut res) = resp_wrapped {
+        return decode(&mut res);
+    }
+
+    return Err(ApiError::FetchError);
 }
