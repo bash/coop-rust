@@ -1,9 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 TARGET="x86_64-apple-darwin"
 BINARY="coop"
-
-cargo build --release --target ${TARGET}
 
 cp target/release/${BINARY} ${BINARY}
 zip coop-${TARGET}.zip ${BINARY}
