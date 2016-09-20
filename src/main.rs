@@ -5,35 +5,38 @@ extern crate rustc_serialize;
 extern crate time;
 
 use std::env;
-use std::process;
 
-use coop::time::midnight;
-use coop::menu::Results;
-use coop::api::fetch_menus;
-use coop::io::{get_location, AnsiFormattable};
+use coop::commands::locations::show_locations;
+use coop::commands::menus::show_menus;
+use coop::commands::dish_stats::show_dish_stats;
+
+const HELP: &'static str = "Usage: coop [COMMAND]
+
+Available Subcommands:
+ - menus [LOCATION]     -  Shows menus for a location
+ - locations            -  Lists all available locations
+ - dish-stats           -  Shows stats dishes
+";
+
+fn help() {
+    println!("{}", HELP);
+}
 
 fn main() {
-    let location_arg: Option<String> = env::args().nth(1);
+    let command_wrapped = env::args().nth(1);
 
-    let location = match location_arg {
-        Some(value) => value,
-        None => get_location()
-    };
-
-    let response: Results = fetch_menus(midnight(), &location).unwrap();
-
-    if response.results.len() == 0 {
-        print!("{}", format!("No menus found for {}", location).red());
-        process::exit(1);
+    if let Option::None = command_wrapped {
+        help();
+        return;
     }
 
-    for menu in response.results {
-        println!("\n{0} {1}", menu.title.bold(), menu.price.to_string().cyan());
+    let command: String = command_wrapped.unwrap();
 
-        for menu in menu.menu {
-            println!(" - {}", menu);
-        }
+    match command.as_ref() {
+        "menus" => show_menus(),
+        "locations" => show_locations(),
+        "dish-stats" => show_dish_stats(),
+        "--help" => help(),
+        _ => println!("Unknown command {}", command)
     }
-
-    println!("");
 }
