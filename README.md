@@ -17,5 +17,10 @@ brew install coop-rust
 ## Usage
 
 ```
-coop [LOCATION] or coop
+Usage: coop [COMMAND]
+
+Available Subcommands:
+ - menus [LOCATION]     -  Shows menus for a location
+ - locations            -  Lists all available locations
+ - dish-stats           -  Shows stats dishes
 ```
