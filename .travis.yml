@@ -1,11 +1,13 @@
-os:
-- osx
+sudo: required
+dist: trusty
 
-osx_image: xcode8
+addons:
+  apt:
+    packages:
+    - 'libssl-dev'
 
 install:
-- curl https://sh.rustup.rs -sSf | sh
-- brew install openssl
+- url https://sh.rustup.rs -sSf | sh
 
 script:
-- DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include cargo build --release
+- cargo build --release
