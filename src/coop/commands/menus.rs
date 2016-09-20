@@ -2,7 +2,7 @@ use std::env;
 use std::process;
 
 use coop::time::midnight;
-use coop::data::Results;
+use coop::data::Menus;
 use coop::api::fetch_menus;
 use coop::io::{get_location, AnsiFormattable};
 
@@ -14,7 +14,7 @@ pub fn show_menus() {
         None => get_location()
     };
 
-    let response: Results = fetch_menus(midnight(), &location).unwrap();
+    let response: Menus = fetch_menus(midnight(), &location).unwrap();
 
     if response.results.len() == 0 {
         print!("{}", format!("No menus found for {}", location).red());

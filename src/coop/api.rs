@@ -6,7 +6,7 @@ use std::io::Read;
 use hyper::client::{Client, Response};
 use rustc_serialize::{json, Decodable};
 
-use coop::data::{Results, Locations};
+use coop::data::{Menus, Locations};
 
 const MENUS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/menus";
 const LOCATIONS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/locations";
@@ -42,7 +42,7 @@ fn fetch<T: Decodable>(url: String) -> Result<T, ApiError> {
     }
 }
 
-pub fn fetch_menus(timestamp: i64, location: &String) -> Result<Results, ApiError> {
+pub fn fetch_menus(timestamp: i64, location: &String) -> Result<Menus, ApiError> {
     return fetch(format!("{}/{}/{}", MENUS_ENDPOINT, location, timestamp));
 }
 

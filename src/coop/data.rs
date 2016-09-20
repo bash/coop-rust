@@ -1,9 +1,4 @@
 #[derive(RustcDecodable)]
-pub struct Locations {
-    pub results: Vec<String>
-}
-
-#[derive(RustcDecodable)]
 pub struct Menu {
     pub price: f32,
     pub timestap: f32,
@@ -12,6 +7,9 @@ pub struct Menu {
 }
 
 #[derive(RustcDecodable)]
-pub struct Results {
-    pub results: Vec<Menu>
+pub struct Results<T> {
+    pub results: Vec<T>
 }
+
+pub type Locations = Results<String>;
+pub type Menus = Results<Menu>;
