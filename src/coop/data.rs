@@ -7,9 +7,16 @@ pub struct Menu {
 }
 
 #[derive(RustcDecodable)]
+pub struct Dish {
+    pub count: i32,
+    pub menu: String
+}
+
+#[derive(RustcDecodable)]
 pub struct Results<T> {
     pub results: Vec<T>
 }
 
 pub type Locations = Results<String>;
 pub type Menus = Results<Menu>;
+pub type Dishes = Results<Dish>;

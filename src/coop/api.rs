@@ -6,10 +6,11 @@ use std::io::Read;
 use hyper::client::{Client, Response};
 use rustc_serialize::{json, Decodable};
 
-use coop::data::{Menus, Locations};
+use coop::data::{Menus, Locations, Dishes};
 
 const MENUS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/menus";
 const LOCATIONS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/locations";
+const DISH_STATS_ENDPOINT: &'static str = "https://themachine.jeremystucki.com/api/v1/coop/stats/dishes";
 
 #[derive(Debug)]
 pub enum ApiError {
@@ -48,4 +49,8 @@ pub fn fetch_menus(timestamp: i64, location: &String) -> Result<Menus, ApiError>
 
 pub fn fetch_locations() -> Result<Locations, ApiError> {
     return fetch(LOCATIONS_ENDPOINT.to_string());
+}
+
+pub fn fetch_dish_stats() -> Result<Dishes, ApiError> {
+    return fetch(DISH_STATS_ENDPOINT.to_string());
 }
