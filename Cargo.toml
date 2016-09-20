@@ -1,0 +1,12 @@
+[package]
+name = "rust"
+version = "0.1.0"
+authors = ["Ruben Schmidmeister <ruben.schmidmeister@icloud.com>"]
+
+[dependencies]
+hyper = "0.9"
+rustc-serialize = "0.3"
+time = "0.1"
+
+# on OSX build with DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include cargo run
+# see: https://github.com/sfackler/rust-openssl/issues/255
