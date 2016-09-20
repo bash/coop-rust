@@ -7,6 +7,6 @@ pub struct Menu {
 }
 
 #[derive(RustcDecodable)]
-pub struct Response {
+pub struct Results {
     pub results: Vec<Menu>
 }

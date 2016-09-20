@@ -9,10 +9,10 @@ use std::io;
 use std::io::Write;
 
 use coop::time::midnight;
-use coop::menu::Response;
+use coop::menu::Results;
 use coop::api::fetch_menus;
 
-fn get_input() -> String {
+fn get_location() -> String {
     let mut input: String = String::new();
 
     print!("Location: ");
@@ -31,10 +31,10 @@ fn main() {
 
     let location = match location_arg {
         Some(value) => value,
-        None => get_input()
+        None => get_location()
     };
 
-    let response: Response = fetch_menus(midnight(), location);
+    let response: Results = fetch_menus(midnight(), location).unwrap();
 
     for menu in response.results {
         println!("{0} {1}", menu.title, menu.price);
