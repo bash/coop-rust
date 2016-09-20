@@ -19,8 +19,12 @@ pub enum ApiError {
 
 fn decode(res: &mut Response) -> Result<Results, ApiError> {
     let mut string = String::new();
+    let readres = res.read_to_string(&mut string);
 
-    res.read_to_string(&mut string);
+    match readres {
+        Err(_) => return Err(ApiError::FetchError),
+        _ => {}
+    }
 
     let result = json::decode(&string);
 

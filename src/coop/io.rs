@@ -6,7 +6,7 @@ pub fn get_location() -> String {
 
     print!("Location: ");
 
-    io::stdout().flush();
+    io::stdout().flush().ok().expect("Failed to flush output");
 
     io::stdin()
         .read_line(&mut input)
