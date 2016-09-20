@@ -7,7 +7,7 @@ addons:
     - 'libssl-dev'
 
 install:
-- curl https://sh.rustup.rs -sSf -y | sh
+- curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 script:
 - cargo build --release
