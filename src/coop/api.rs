@@ -2,7 +2,6 @@ extern crate hyper;
 
 use std::string::String;
 use std::io::Read;
-use std::any::Any;
 
 use hyper::client::Client;
 use hyper::client::Response;
@@ -26,8 +25,8 @@ fn decode(res: &mut Response) -> Result<Results, ApiError> {
     let result = json::decode(&string);
 
     return match result {
-        Err(err) => Err(ApiError::ParseError),
-        Ok(value) => Ok(value)
+        Ok(value) => Ok(value),
+        Err(_) => Err(ApiError::ParseError)
     };
 }
 
@@ -37,6 +36,6 @@ pub fn fetch_menus(timestamp: i64, location: String) -> Result<Results, ApiError
 
     return match client.get(&url).send() {
         Ok(mut res) => decode(&mut res),
-        Err(err) => Err(ApiError::FetchError)
+        Err(_) => Err(ApiError::FetchError)
     };
 }

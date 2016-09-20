@@ -5,26 +5,11 @@ extern crate rustc_serialize;
 extern crate time;
 
 use std::env;
-use std::io;
-use std::io::Write;
 
 use coop::time::midnight;
 use coop::menu::Results;
 use coop::api::fetch_menus;
-
-fn get_location() -> String {
-    let mut input: String = String::new();
-
-    print!("Location: ");
-
-    io::stdout().flush();
-
-    io::stdin()
-      .read_line(&mut input)
-      .expect("Failed to read input");
-
-    return input;
-}
+use coop::io::get_location;
 
 fn main() {
     let location_arg: Option<String> = env::args().nth(1);
