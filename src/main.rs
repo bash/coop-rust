@@ -9,7 +9,7 @@ use std::env;
 use coop::time::midnight;
 use coop::menu::Results;
 use coop::api::fetch_menus;
-use coop::io::{get_location, cyan, bold};
+use coop::io::{get_location, AnsiFormattable};
 
 fn main() {
     let location_arg: Option<String> = env::args().nth(1);
@@ -22,7 +22,7 @@ fn main() {
     let response: Results = fetch_menus(midnight(), location).unwrap();
 
     for menu in response.results {
-        println!("\n{0} {1}", bold(menu.title), cyan(menu.price.to_string()));
+        println!("\n{0} {1}", menu.title.bold(), menu.price.to_string().cyan());
 
         for menu in menu.menu {
             println!(" - {}", menu);

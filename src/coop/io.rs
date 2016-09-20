@@ -16,6 +16,21 @@ impl ToString for AnsiFormat {
     }
 }
 
+pub trait AnsiFormattable {
+    fn bold(&self) -> String;
+    fn cyan(&self) -> String;
+}
+
+impl AnsiFormattable for String {
+    fn bold(&self) -> String {
+        return ansi_format(self, AnsiFormat::Bold);
+    }
+
+    fn cyan(&self) -> String {
+        return ansi_format(self, AnsiFormat::Cyan);
+    }
+}
+
 pub fn get_location() -> String {
     let mut input: String = String::new();
 
@@ -30,14 +45,6 @@ pub fn get_location() -> String {
     return input;
 }
 
-fn ansi_format(string: String, format: AnsiFormat) -> String {
+fn ansi_format(string: &String, format: AnsiFormat) -> String {
     return format!("{}{}{}", format.to_string(), string, AnsiFormat::Reset.to_string());
-}
-
-pub fn bold(string: String) -> String {
-    return ansi_format(string, AnsiFormat::Bold);
-}
-
-pub fn cyan(string: String) -> String {
-    return ansi_format(string, AnsiFormat::Cyan);
 }
