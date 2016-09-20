@@ -8,4 +8,4 @@ install:
 - brew install openssl
 
 script:
-- DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include cargo build --production
+- DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include cargo build --release
