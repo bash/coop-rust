@@ -13,9 +13,9 @@ use coop::commands::dish_stats::show_dish_stats;
 const HELP: &'static str = "Usage: coop [COMMAND]
 
 Available Subcommands:
- - menus [LOCATION]     -  Shows menus for a location
- - locations            -  Lists all available locations
- - dish-stats           -  Shows stats dishes
+ - menus [LOCATION]       -  Shows menus for a location
+ - locations              -  Lists all available locations
+ - dish-stats [LOCATION]  -  Shows stats dishes. Optionally only for one location.
 ";
 
 fn help() {

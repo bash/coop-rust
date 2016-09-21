@@ -54,3 +54,7 @@ pub fn fetch_locations() -> Result<Locations, ApiError> {
 pub fn fetch_dish_stats() -> Result<Dishes, ApiError> {
     return fetch(DISH_STATS_ENDPOINT.to_string());
 }
+
+pub fn fetch_dish_stats_for_location(location: String) -> Result<Dishes, ApiError> {
+    return fetch(format!("{}/{}", DISH_STATS_ENDPOINT, location));
+}
