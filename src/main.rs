@@ -35,7 +35,7 @@ fn main() {
     match command.as_ref() {
         "menus" => show_menus(),
         "locations" => show_locations(),
-        "dish-stats" => show_dish_stats(),
+        "dish-stats" => show_dish_stats().unwrap(),
         "--help" => help(),
         _ => println!("Unknown command {}", command)
     }
