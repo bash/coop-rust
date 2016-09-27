@@ -9,10 +9,21 @@ Rust client for [STJEREM/coop](https://github.com/STJEREM/coop).
 
 ### OSX
 
+#### Installation
+
 ```bash
 brew tap bash/homebrew-coop
 brew install coop-rust
 ````
+
+#### Bash Completion
+
+Add the following to your `~/.bash_profile`:
+
+```
+. /usr/local/etc/bash_completion.d/coop-completion.bash
+```
+
 
 ## Usage
 
