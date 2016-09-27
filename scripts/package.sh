@@ -7,7 +7,7 @@ DIR="coop-${TARGET}"
 mkdir ${DIR}
 
 cp target/release/${BINARY} ${DIR}/
-cp scripts/bash_completion.sh ${DIR}/
+cp -R contrib ${DIR}/contrib
 
 zip -r coop-${TARGET}.zip ${DIR}
 
